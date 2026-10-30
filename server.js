@@ -225,7 +225,7 @@ app.post("/api/v1/mpesa/callback", async (req, res) => {
       console.log({ phone, amount, tranx_id });
 
       // Save successful payment to MongoDB / Database
-     const payment = new Transaction({
+     const payment = new Payment({
       number: phone,
       amount: amount,
       tranx_id: tranx_id
