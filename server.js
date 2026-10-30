@@ -5,6 +5,7 @@ const axios = require("axios");
 const mongoose = require('mongoose');
 const cors = require("cors");
 const Payment=require("./models/paymentModel")
+const Transaction=require('./models/Transaction.js')
 require("dotenv").config();
 
 
