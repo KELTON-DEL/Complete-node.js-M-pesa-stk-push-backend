@@ -7,7 +7,7 @@ const cors = require("cors");
 const Payment=require("./models/paymentModel")
 const Transaction=require('./models/Transaction')
 require("dotenv").config();
-
+   
 
 const app = express();
 app.use(express.json());
@@ -282,25 +282,25 @@ app.post("/api/v1/mpesa/callback", async (req, res) => {
 // GET all transactions
 app.get('/transactions', async (req, res) => {
   try {
+    console.log("Database name:", Transaction.db.name);
+    console.log("Collection name:", Transaction.collection.name);
 
-    const transactions = await Transaction.find()
-      .sort({ date: -1 });
+    const transactions = await Transaction.find();
+
+    console.log("Transactions found:", transactions.length);
+    console.log("Transactions:", transactions);
 
     res.status(200).json(transactions);
 
   } catch (error) {
-
-    console.error(error);
+    console.error("Transaction error:", error);
 
     res.status(500).json({
       success: false,
-      message: 'Failed to retrieve transactions',
-      error: error.message
+      message: error.message
     });
-
   }
 });
-
 
 
 /*
