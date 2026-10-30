@@ -277,6 +277,32 @@ app.post("/api/v1/mpesa/callback", async (req, res) => {
   }
 });
 
+
+
+// GET all transactions
+app.get('/transactions', async (req, res) => {
+  try {
+
+    const transactions = await Transaction.find()
+      .sort({ date: -1 });
+
+    res.status(200).json(transactions);
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve transactions',
+      error: error.message
+    });
+
+  }
+});
+
+
+
 /*
 app.post("/api/v1/mpesa/callback", (req, res) => {
 
