@@ -279,7 +279,26 @@ app.post("/api/v1/mpesa/callback", async (req, res) => {
 });
 
 
+app.get('/transactions', async (req, res) => {
+  try {
+    const transactions = await Payment.find();
 
+    console.log("DATABASE:", Payment.db.name);
+    console.log("COLLECTION:", Payment.collection.name);
+    console.log("RECORD COUNT:", transactions.length);
+
+    res.status(200).json(transactions);
+
+  } catch (error) {
+    console.error("FETCH ERROR:", error);
+
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
+
+/*
 // GET all transactions
 app.get('/transactions', async (req, res) => {
   try {
@@ -302,7 +321,7 @@ app.get('/transactions', async (req, res) => {
   }
 });
 
-
+*/
 
 /*
 app.post("/api/v1/mpesa/callback", (req, res) => {
