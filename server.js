@@ -284,7 +284,7 @@ app.post("/api/v1/mpesa/callback", async (req, res) => {
 app.get('/transactions', async (req, res) => {
   try {
 
-    const transactions = await Payment.find()
+    const transactions = await Transaction.find()
       .sort({ date: -1 });
 
     res.status(200).json(transactions);
